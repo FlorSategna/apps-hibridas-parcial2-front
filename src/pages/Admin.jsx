@@ -1,38 +1,41 @@
 import { useState, useEffect } from "react"
-import { fetchPrivado } from "../service/api"
+import { obtenerGeneros } from "../service/api"
+
+import AdminPeliculas from "../components/AdminPeliculas"
+import AdminGeneros from "../components/AdminGeneros"
+import AdminReviews from "../components/AdminReviews"
+
 function Admin(){
 
-    const [ usuarios, setUsuarios] = useState([]);
-    const endPoint = '/api/usuarios'
+    const [ generos, setGeneros ] = useState([]);
+    const [ error, setError ] = useState('');
+
     useEffect(  () => {
-        async function getUsuarios() {
+        async function getGeneros() {
             try {
-                const res = await fetchPrivado(endPoint)
-                setUsuarios( res.data);
+                const res = await obtenerGeneros();
+                setGeneros( res.data);
             } catch (error) {
-                console.error(error)
+                console.error(error);
+                setError('No pudimos obtener los géneros');
             }
         }
 
-        getUsuarios()
+        getGeneros();
     }, [] )
+
     return (
         <section>
             <h1>Panel del Administrador</h1>
-            <p> En esta sección desarrollaremos el Panel del Administrador</p>
+            <p>{ error }</p>
 
-            <h2>Usuarios</h2>
-            <div className="container">
-            {
-                usuarios.map( usuario => (
-                    <div className="card" key={ usuario._id}>
-                        <h4>{ usuario.name }</h4>
-                        <p>{ usuario.email }</p>
-                    </div>
-                ))
-            }
-            </div>
+            <AdminPeliculas generos={ generos } />
 
+            <hr />
+            <AdminGeneros generos={ generos } setGeneros={ setGeneros } />
+
+            <hr />
+            <AdminReviews />
         </section>
     )
 }
