@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { obtenerPeliculas } from '../service/api.js'
+import { Link } from 'react-router-dom'
 
 
 function Home(){
@@ -29,7 +30,7 @@ function Home(){
             <ul>
                 {
                     peliculas.map(  pelicula => 
-                                <li key={ pelicula._id}> { pelicula.title } ({ pelicula.year }) </li>
+                                    <li key={ pelicula._id}> <Link to={ `/peliculas/${pelicula._id}` }> { pelicula.title } ({ pelicula.year }) </Link> </li>
                                 )
                 }
             </ul>

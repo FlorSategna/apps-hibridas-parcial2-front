@@ -10,6 +10,7 @@ import AccesoDenegado from './pages/AccesoDenegado'
 import Nav from './components/Nav'
 import ProtectedRoute from './components/ProtectedRoute'
 import RoleRoute from './components/RoleRouter'
+import PeliculaDetalle from './pages/PeliculaDetalle'
 
 function App() {
 
@@ -35,6 +36,7 @@ function App() {
 
         </Route>
         <Route path='/acceso-denegado' element={< AccesoDenegado />} />
+        <Route path='/peliculas/:id' element={ <PeliculaDetalle />} />
         <Route path='*' element={ <NotFound />} />
       </Routes>
     </>

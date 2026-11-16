@@ -40,6 +40,16 @@ export async function obtenerReviews(){
     return response.json();
 }
 
+export async function obtenerReviewsPorPelicula(id){
+    const response = await fetch(`${API_URL}/api/peliculas/${id}/reviews`);
+
+    if( !response.ok){
+        throw new Error("No se pudo obtener las reseñas de la película");
+    }
+
+    return response.json();
+}
+
 export async function iniciarSesion(email, password){
     const response = await fetch(`${API_URL}/api/auth/login`,
                 {
@@ -221,6 +231,22 @@ export async function borrarReview(id){
 
     if( !data){
         throw new Error("No se pudo borrar la reseña");
+    }
+
+    return data;
+}
+
+export async function crearReview(movie, rating, comment){
+    const data = await fetchPrivado('/api/reviews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ movie, rating, comment })
+                });
+
+    if( !data){
+        throw new Error("No se pudo crear la reseña");
     }
 
     return data;
