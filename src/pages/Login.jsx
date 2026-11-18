@@ -4,8 +4,6 @@ import { useAuth } from '../context/AuthContext.jsx';
 
 function Login(){
     const [ error, setError] = useState('');
-
-    // Estados para el formulario
     const [ mensaje, setMensaje ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
@@ -22,9 +20,7 @@ function Login(){
         setMensaje('');
 
         try {
-            // Guardamos el token en un contexto
             await login(email, password);
-            // Si el logue fue exitoso, navegamos al destino
             navigate(destino, { replace: true});
  
         } catch (error) {
@@ -38,7 +34,7 @@ function Login(){
 
     return(
         <>
-            <h1>Page Login</h1>
+            <h1>Iniciar sesión</h1>
             
             <form onSubmit={ handleSubmitLogin}>
                 <label htmlFor='email'> Email</label>

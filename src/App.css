@@ -1,5 +1,10 @@
 /* Encabezado: logo, título y barra de navegación (todo en Nav.jsx) */
 header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
   padding: 20px;
   background-color: #0b0b0f;
   border-bottom: 2px solid #e50914;
@@ -24,17 +29,20 @@ nav {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  margin-top: 15px;
   padding: 12px;
   background-color: #14141c;
   border-radius: 8px;
 }
 
-nav p {
-  margin: 0;
+/* Derecha del header: saludo + botones de sesión */
+.acciones {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-nav button {
+.acciones p,
+.acciones button {
   margin: 0;
 }
 
@@ -79,6 +87,17 @@ button:hover {
 button:disabled {
   background-color: #555555;
   cursor: not-allowed;
+}
+
+/* Botón secundario: solo borde, sin relleno */
+.btn-secondary {
+  background-color: transparent;
+  color: #e5e5e5;
+  box-shadow: inset 0 0 0 1px #6b6b80;
+}
+
+.btn-secondary:hover {
+  background-color: #1f1f2e;
 }
 
 /* Formularios */

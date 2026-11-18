@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
-import { obtenerPeliculas } from '../service/api.js'
-import { Link } from 'react-router-dom'
+import { obtenerPeliculas, obtenerGeneros } from '../service/api.js'
+import { useNavigate } from 'react-router-dom'
 
 
 function Home(){
     const [ error, setError] = useState('');
     const [ peliculas, setPeliculas ] = useState( [] );
+    const [ generos, setGeneros ] = useState( [] );
+    const navigate = useNavigate();
 
     useEffect( () => {
         async function getPeliculas(){
@@ -17,23 +19,37 @@ function Home(){
                 setError('No pudimos obtener las películas :(')
             }
         }
+        async function getGeneros(){
+            try {
+                const result = await obtenerGeneros();
+                setGeneros( result.data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
         getPeliculas();
+        getGeneros();
 
     }, [])
 
     return(
         <>
-            <h1>Page home</h1>
+            <h1>Inicio</h1>
             <h4>Lista de películas</h4>
 
             <p>{ error}</p>
-            <ul>
+            <div className="container">
                 {
-                    peliculas.map(  pelicula => 
-                                    <li key={ pelicula._id}> <Link to={ `/peliculas/${pelicula._id}` }> { pelicula.title } ({ pelicula.year }) </Link> </li>
-                                )
+                    peliculas.map(  pelicula => (
+                        <div className="card" key={ pelicula._id }>
+                            <h4>{ pelicula.title } ({ pelicula.year })</h4>
+                            <p>{ generos.find( genero => genero._id === pelicula.genre )?.name }</p>
+                            <button onClick={ () => navigate( `/peliculas/${pelicula._id}` ) }> Ver reseñas</button>
+                        </div>
+                    ))
                 }
-            </ul>
+            </div>
         </>
     )
 }

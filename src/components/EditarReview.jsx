@@ -39,7 +39,7 @@ function EditarReview({ review, movie, onEditada, onCancelar }){
             <textarea name='comment' value={ datos.comment } onChange={ handleChange } maxLength={256} />
 
             <button type='submit'> Guardar cambios</button>
-            <button type='button' onClick={ onCancelar }> Cancelar</button>
+            <button type='button' className="btn-secondary" onClick={ onCancelar }> Cancelar</button>
 
             <p>{ error }</p>
         </form>

@@ -8,8 +8,6 @@ function Register(){
 
     const navigate = useNavigate();
 
-
-    // Estados para el formulario de registro
     const [ user, setUser] = useState({
             name: '', 
             email: '', 
@@ -42,7 +40,7 @@ function Register(){
 
     return(
         <>
-            <h1>Page Register</h1>
+            <h1>Crear una cuenta</h1>
             <form onSubmit={ handleSubmitRegister }>
                 <label htmlFor="name">Nombre</label>
                 <input type="text" name='name'    value={ user.name} onChange={ handleChange } required />

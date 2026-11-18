@@ -6,7 +6,7 @@ function AccesoDenegado(){
         <section>
             <h2>Acceso Denegado | Error 403</h2>
 
-            <p>No tenes permisos para acceder a este recurso</p>
+            <p>No tenés permisos para acceder a esta página.</p>
 
             <Link to="/">Regresar al Inicio </Link>
         </section>

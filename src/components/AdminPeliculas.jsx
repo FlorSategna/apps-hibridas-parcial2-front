@@ -8,7 +8,6 @@ function AdminPeliculas({ generos }){
     const [ mensaje, setMensaje ] = useState('');
     const [ editandoId, setEditandoId ] = useState(null);
 
-    // Estados para el formulario de película
     const [ pelicula, setPelicula ] = useState({
         title: '',
         year: '',
@@ -127,7 +126,7 @@ function AdminPeliculas({ generos }){
 
                 {
                     editandoId && (
-                        <button type='button' onClick={ handleCancelar }> Cancelar</button>
+                        <button type='button' className="btn-secondary" onClick={ handleCancelar }> Cancelar</button>
                     )
                 }
             </form>
@@ -142,7 +141,7 @@ function AdminPeliculas({ generos }){
                     <div className="card" key={ item._id }>
                         <h4>{ item.title } ({ item.year })</h4>
                         <p>{ generos.find( genero => genero._id === item.genre )?.name }</p>
-                        <button onClick={ () => handleEditar( item._id ) }> Editar</button>
+                        <button className="btn-secondary" onClick={ () => handleEditar( item._id ) }> Editar</button>
                         <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
                     </div>
                 ))

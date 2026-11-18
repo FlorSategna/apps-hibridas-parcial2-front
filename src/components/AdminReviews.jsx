@@ -98,7 +98,7 @@ function AdminReviews(){
                             <textarea name='comment' value={ review.comment } onChange={ handleChange } maxLength={256} />
 
                             <button type='submit'> Guardar cambios</button>
-                            <button type='button' onClick={ handleCancelar }> Cancelar</button>
+                            <button type='button' className="btn-secondary" onClick={ handleCancelar }> Cancelar</button>
                         </form>
                     </>
                 )
@@ -114,7 +114,7 @@ function AdminReviews(){
                         <h4>{ item.movie?.title }</h4>
                         <p><strong>Puntaje:</strong> { item.rating } / 5</p>
                         <p>{ item.comment }</p>
-                        <button onClick={ () => handleEditar( item ) }> Editar</button>
+                        <button className="btn-secondary" onClick={ () => handleEditar( item ) }> Editar</button>
                         <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
                     </div>
                 ))

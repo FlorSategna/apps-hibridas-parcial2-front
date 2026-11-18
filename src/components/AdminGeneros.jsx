@@ -82,7 +82,7 @@ function AdminGeneros({ generos, setGeneros }){
 
                 {
                     editandoId && (
-                        <button type='button' onClick={ handleCancelar }> Cancelar</button>
+                        <button type='button' className="btn-secondary" onClick={ handleCancelar }> Cancelar</button>
                     )
                 }
             </form>
@@ -96,7 +96,7 @@ function AdminGeneros({ generos, setGeneros }){
                 generos.map( item => (
                     <div className="card" key={ item._id }>
                         <h4>{ item.name }</h4>
-                        <button onClick={ () => handleEditar( item ) }> Editar</button>
+                        <button className="btn-secondary" onClick={ () => handleEditar( item ) }> Editar</button>
                         <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
                     </div>
                 ))

@@ -117,7 +117,7 @@ function PeliculaDetalle(){
                                     {
                                         autenticado && item.user?._id === user.id && (
                                             <>
-                                                <button onClick={ () => setEditandoId( item._id ) }> Editar</button>
+                                                <button className="btn-secondary" onClick={ () => setEditandoId( item._id ) }> Editar</button>
                                                 <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
                                             </>
                                         )
