@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext' 
+import { useAuth } from '../context/AuthContext'
+import logo from '../assets/logo.png' 
 
 
 function Nav(){
@@ -13,6 +14,13 @@ function Nav(){
     }
 
     return (
+
+        <header>
+        <div className="marca">
+            <img src={ logo } alt='logo' />
+            <h1> Movies Reviews</h1>
+        </div>
+
       <nav>
         {
             autenticado ? (
@@ -41,6 +49,7 @@ function Nav(){
         }
 
       </nav>
+    </header>
     )
 }
 

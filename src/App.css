@@ -1,184 +1,152 @@
-.counter {
-  font-size: 16px;
-  padding: 5px 10px;
+/* Encabezado: logo, título y barra de navegación (todo en Nav.jsx) */
+header {
+  padding: 20px;
+  background-color: #0b0b0f;
+  border-bottom: 2px solid #e50914;
+}
+
+.marca {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.marca img {
+  width: 70px;
+  height: auto;
+}
+
+/* Barra de links */
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 15px;
+  padding: 12px;
+  background-color: #14141c;
+  border-radius: 8px;
+}
+
+nav p {
+  margin: 0;
+}
+
+nav button {
+  margin: 0;
+}
+
+/* Contenido principal */
+main {
+  flex: 1;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Pie de página */
+footer {
+  padding: 20px;
+  background-color: #0b0b0f;
+  border-top: 2px solid #e50914;
+  color: #b5b5b5;
+  font-size: 0.9rem;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* Botones */
+button {
+  background-color: #e50914;
+  color: #ffffff;
+  border: none;
   border-radius: 5px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 2px solid transparent;
-  transition: border-color 0.3s;
-  margin-bottom: 24px;
-
-  &:hover {
-    border-color: var(--accent-border);
-  }
-  &:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-  }
+  padding: 8px 14px;
+  margin: 5px 5px 0 0;
+  cursor: pointer;
 }
 
-.hero {
-  position: relative;
-
-  .base,
-  .framework,
-  .vite {
-    inset-inline: 0;
-    margin: 0 auto;
-  }
-
-  .base {
-    width: 170px;
-    position: relative;
-    z-index: 0;
-  }
-
-  .framework,
-  .vite {
-    position: absolute;
-  }
-
-  .framework {
-    z-index: 1;
-    top: 34px;
-    height: 28px;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(44deg) rotateY(39deg)
-      scale(1.4);
-  }
-
-  .vite {
-    z-index: 0;
-    top: 107px;
-    height: 26px;
-    width: auto;
-    transform: perspective(2000px) rotateZ(300deg) rotateX(40deg) rotateY(39deg)
-      scale(0.8);
-  }
+button:hover {
+  background-color: #b20710;
 }
 
-#center {
+button:disabled {
+  background-color: #555555;
+  cursor: not-allowed;
+}
+
+/* Formularios */
+form {
   display: flex;
   flex-direction: column;
-  gap: 25px;
-  place-content: center;
-  place-items: center;
-  flex-grow: 1;
-
-  @media (max-width: 1024px) {
-    padding: 32px 20px 24px;
-    gap: 18px;
-  }
-}
-
-#next-steps {
-  display: flex;
-  border-top: 1px solid var(--border);
+  gap: 10px;
+  max-width: 400px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #14141c;
+  border: 1px solid #2e2e3e;
+  border-radius: 8px;
   text-align: left;
-
-  & > div {
-    flex: 1 1 0;
-    padding: 32px;
-    @media (max-width: 1024px) {
-      padding: 24px 20px;
-    }
-  }
-
-  .icon {
-    margin-bottom: 16px;
-    width: 22px;
-    height: 22px;
-  }
-
-  @media (max-width: 1024px) {
-    flex-direction: column;
-    text-align: center;
-  }
 }
 
-#docs {
-  border-right: 1px solid var(--border);
-
-  @media (max-width: 1024px) {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-  }
+label {
+  font-weight: bold;
 }
 
-#next-steps ul {
-  list-style: none;
-  padding: 0;
+input, select, textarea {
+  padding: 8px;
+  background-color: #0b0b0f;
+  color: #e5e5e5;
+  border: 1px solid #3a3a4d;
+  border-radius: 5px;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #e50914;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Tarjetas (películas, reseñas, géneros) */
+.container {
   display: flex;
-  gap: 8px;
-  margin: 32px 0 0;
-
-  .logo {
-    height: 18px;
-  }
-
-  a {
-    color: var(--text-h);
-    font-size: 16px;
-    border-radius: 6px;
-    background: var(--social-bg);
-    display: flex;
-    padding: 6px 12px;
-    align-items: center;
-    gap: 8px;
-    text-decoration: none;
-    transition: box-shadow 0.3s;
-
-    &:hover {
-      box-shadow: var(--shadow);
-    }
-    .button-icon {
-      height: 18px;
-      width: 18px;
-    }
-  }
-
-  @media (max-width: 1024px) {
-    margin-top: 20px;
-    flex-wrap: wrap;
-    justify-content: center;
-
-    li {
-      flex: 1 1 calc(50% - 8px);
-    }
-
-    a {
-      width: 100%;
-      justify-content: center;
-      box-sizing: border-box;
-    }
-  }
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin: 20px 0;
 }
 
-#spacer {
-  height: 88px;
-  border-top: 1px solid var(--border);
-  @media (max-width: 1024px) {
-    height: 48px;
-  }
+.card {
+  width: 220px;
+  padding: 15px;
+  background-color: #14141c;
+  border: 1px solid #2e2e3e;
+  border-radius: 8px;
 }
 
-.ticks {
-  position: relative;
-  width: 100%;
+.card:hover {
+  border-color: #e50914;
+}
 
-  &::before,
-  &::after {
-    content: '';
-    position: absolute;
-    top: -4.5px;
-    border: 5px solid transparent;
-  }
+/* El formulario de editar reseña va adentro de una tarjeta: le sacamos el marco doble */
+.card form {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+}
 
-  &::before {
-    left: 0;
-    border-left-color: var(--border);
-  }
-  &::after {
-    right: 0;
-    border-right-color: var(--border);
-  }
+/* Separación entre secciones */
+section {
+  margin-bottom: 30px;
 }

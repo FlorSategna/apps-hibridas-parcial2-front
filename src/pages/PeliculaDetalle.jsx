@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import { useParams, Link, useLocation } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext.jsx'
-import { obtenerPelicula, obtenerReviewsPorPelicula } from '../service/api.js'
+import { obtenerPelicula, obtenerReviewsPorPelicula, borrarReview } from '../service/api.js'
 import FormReview from '../components/FormReview.jsx'
+import EditarReview from '../components/EditarReview.jsx'
 
 
 function PeliculaDetalle(){
@@ -13,6 +14,7 @@ function PeliculaDetalle(){
     const [ error, setError] = useState('');
     const [ pelicula, setPelicula ] = useState( null );
     const [ reviews, setReviews ] = useState( [] );
+    const [ editandoId, setEditandoId ] = useState( null );
 
     useEffect( () => {
         async function getPelicula(){
@@ -42,6 +44,26 @@ function PeliculaDetalle(){
     function agregarReview( nueva){
         const review = { ...nueva, user: { _id: user.id, name: user.name } };
         setReviews( [ review, ...reviews ]);
+    }
+
+    function actualizarReview( editada){
+        setReviews( reviews.map( item => item._id === editada._id ? { ...item, rating: editada.rating, comment: editada.comment } : item));
+        setEditandoId( null);
+    }
+
+    async function handleBorrar( idReview){
+        if( !window.confirm('¿Seguro que querés borrar tu reseña?')){
+            return;
+        }
+
+        setError('');
+
+        try {
+            await borrarReview( idReview);
+            setReviews( reviews.filter( item => item._id !== idReview));
+        } catch (error) {
+            setError( error.message);
+        }
     }
 
     if( !pelicula){
@@ -78,9 +100,31 @@ function PeliculaDetalle(){
             {
                 reviews.map( item => (
                     <div className="card" key={ item._id }>
-                        <h4>{ item.user?.name }</h4>
-                        <p><strong>Puntaje:</strong> { item.rating } / 5</p>
-                        <p>{ item.comment }</p>
+                        {
+                            editandoId === item._id ? (
+                                <EditarReview 
+                                    review={ item } 
+                                    movie={ id } 
+                                    onEditada={ actualizarReview } 
+                                    onCancelar={ () => setEditandoId( null) } 
+                                />
+                            ) : (
+                                <>
+                                    <h4>{ item.user?.name }</h4>
+                                    <p><strong>Puntaje:</strong> { item.rating } / 5</p>
+                                    <p>{ item.comment }</p>
+
+                                    {
+                                        autenticado && item.user?._id === user.id && (
+                                            <>
+                                                <button onClick={ () => setEditandoId( item._id ) }> Editar</button>
+                                                <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
+                                            </>
+                                        )
+                                    }
+                                </>
+                            )
+                        }
                     </div>
                 ))
             }
