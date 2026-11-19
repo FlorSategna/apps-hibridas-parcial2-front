@@ -5,6 +5,8 @@ import { obtenerPelicula, obtenerReviewsPorPelicula, borrarReview } from '../ser
 import FormReview from '../components/FormReview.jsx'
 import EditarReview from '../components/EditarReview.jsx'
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 function PeliculaDetalle(){
     const { id } = useParams();
@@ -71,65 +73,78 @@ function PeliculaDetalle(){
     }
 
     return(
-        <>
-            <Link to='/'> Volver al inicio</Link>
+        <div className="contenido-detalle">
 
-            <h1>{ pelicula.title } ({ pelicula.year })</h1>
-            <h4>Género: { pelicula.genre?.name }</h4>
-            <p>{ pelicula.description }</p>
+            <div>
 
-            <h2>Reseñas</h2>
+                {
+                    pelicula.image ? (
+                        <img className="poster" src={ `${API_URL}${pelicula.image}` } alt={ pelicula.title } />
+                    ) : (
+                        <div className="sin-imagen poster">Sin imagen</div>
+                    )
+                }
 
-            {
-                autenticado ? (
-                    <FormReview movie={ id } onCreada={ agregarReview } />
-                ) : (
-                    <p> <Link to='/login' state={{ from: location }}>Iniciá sesión</Link> para escribir una reseña.</p>
-                )
-            }
-
-            <p>{ error}</p>
-
-            {
-                reviews.length === 0 && (
-                    <p>Todavía no hay reseñas para esta película.</p>
-                )
-            }
-
-            <div className="container">
-            {
-                reviews.map( item => (
-                    <div className="card" key={ item._id }>
-                        {
-                            editandoId === item._id ? (
-                                <EditarReview 
-                                    review={ item } 
-                                    movie={ id } 
-                                    onEditada={ actualizarReview } 
-                                    onCancelar={ () => setEditandoId( null) } 
-                                />
-                            ) : (
-                                <>
-                                    <h4>{ item.user?.name }</h4>
-                                    <p><strong>Puntaje:</strong> { item.rating } / 5</p>
-                                    <p>{ item.comment }</p>
-
-                                    {
-                                        autenticado && item.user?._id === user.id && (
-                                            <>
-                                                <button className="btn-secondary" onClick={ () => setEditandoId( item._id ) }> Editar</button>
-                                                <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
-                                            </>
-                                        )
-                                    }
-                                </>
-                            )
-                        }
-                    </div>
-                ))
-            }
+                <h1>{ pelicula.title } ({ pelicula.year })</h1>
+                <h4>Género: { pelicula.genre?.name }</h4>
+                <p>{ pelicula.description }</p>
             </div>
-        </>
+
+            <div>
+                <h2>Reseñas</h2>
+
+                {
+                    autenticado ? (
+                        <FormReview movie={ id } onCreada={ agregarReview } />
+                    ) : (
+                        <p> <Link to='/login' state={{ from: location }}>Iniciá sesión</Link> para escribir una reseña.</p>
+                    )
+                }
+
+                <p>{ error}</p>
+
+                {
+                    reviews.length === 0 && (
+                        <p>Todavía no hay reseñas para esta película.</p>
+                    )
+                }
+
+                <div className="container">
+                {
+                    reviews.map( item => (
+                        <div className="card" key={ item._id }>
+                            {
+                                editandoId === item._id ? (
+                                    <EditarReview 
+                                        review={ item } 
+                                        movie={ id } 
+                                        onEditada={ actualizarReview } 
+                                        onCancelar={ () => setEditandoId( null) } 
+                                    />
+                                ) : (
+                                    <>
+                                        <h4>{ item.user?.name }</h4>
+                                        <p><strong>Puntaje:</strong> { item.rating } / 5</p>
+                                        <p>{ item.comment }</p>
+
+                                        {
+                                            autenticado && item.user?._id === user.id && (
+                                                <>
+                                                    <button className="btn-secondary" onClick={ () => setEditandoId( item._id ) }> Editar</button>
+                                                    <button onClick={ () => handleBorrar( item._id ) }> Borrar</button>
+                                                </>
+                                            )
+                                        }
+                                    </>
+                                )
+                            }
+                        </div>
+                    ))
+                }
+                </div>
+            </div>
+
+        </div>
     )
 }
 

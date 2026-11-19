@@ -36,7 +36,7 @@ function Nav(){
 
                 <br />
                 <button onClick={ cerrarSesion} > Cerrar Sesión</button>
-                <p> Hola! { user.name } </p>
+                <p> Hola, { user.name } !</p>
             </>
             ) : ( 
             <> 

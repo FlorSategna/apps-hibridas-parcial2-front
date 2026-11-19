@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { obtenerPeliculas, obtenerGeneros } from '../service/api.js'
 import { useNavigate } from 'react-router-dom'
 
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Home(){
     const [ error, setError] = useState('');
@@ -43,6 +44,13 @@ function Home(){
                 {
                     peliculas.map(  pelicula => (
                         <div className="card" key={ pelicula._id }>
+                            {
+                                pelicula.image ? (
+                                    <img src={ `${API_URL}${pelicula.image}` } alt={ pelicula.title } />
+                                ) : (
+                                    <div className="sin-imagen">Sin imagen</div>
+                                )
+                            }
                             <h4>{ pelicula.title } ({ pelicula.year })</h4>
                             <p>{ generos.find( genero => genero._id === pelicula.genre )?.name }</p>
                             <button onClick={ () => navigate( `/peliculas/${pelicula._id}` ) }> Ver reseñas</button>

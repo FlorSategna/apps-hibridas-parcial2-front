@@ -251,3 +251,19 @@ export async function crearReview(movie, rating, comment){
 
     return data;
 }
+
+export async function subirImagenPelicula(id, archivo){
+    const formData = new FormData();
+    formData.append('image', archivo);
+
+    const data = await fetchPrivado(`/api/peliculas/${id}/imagen`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+    if( !data){
+        throw new Error("No se pudo subir la imagen");
+    }
+
+    return data;
+}
